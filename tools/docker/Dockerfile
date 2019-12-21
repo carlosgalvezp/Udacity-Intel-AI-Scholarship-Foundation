@@ -4,6 +4,9 @@ RUN apt-get update && \
     apt-get install --no-install-recommends --assume-yes \
         curl \
         gpg-agent \
+        python3-pip \
+        python3-setuptools \
+        python3-wheel \
         software-properties-common && \
     rm -rf /var/lib/apt/lists/*
 
@@ -18,3 +21,6 @@ RUN curl -fsSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-P
         intel-openvino-dev-ubuntu18-${OPENVINO_VERSION} \
         intel-openvino-runtime-ubuntu18-${OPENVINO_VERSION} && \
     rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt requirements.txt
+RUN pip3 install --requirement requirements.txt
